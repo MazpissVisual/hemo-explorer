@@ -9,7 +9,7 @@ loadEnv(path.join(__dirname, '.env'));
 
 const PORT = Number(process.env.PORT || 8080);
 const HOST = process.env.HOST || '127.0.0.1';
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = process.env.VERCEL ? '/tmp' : path.join(__dirname, 'data');
 const DATA_FILE = path.join(DATA_DIR, 'students.json');
 const teacher = {
   username: process.env.TEACHER_USERNAME || 'guru',
@@ -26,8 +26,12 @@ if (!teacher.password || secret.length < 32) {
   process.exit(1);
 }
 
-fs.mkdirSync(DATA_DIR, { recursive: true });
-if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '[]\n', 'utf8');
+try {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '[]\n', 'utf8');
+} catch (e) {
+  console.warn('Vercel read-only file system terdeteksi, melewati pembuatan file lokal.');
+}
 
 const mime = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
