@@ -18,7 +18,7 @@ const secret = process.env.SESSION_SECRET || 'fallback-secret-for-vercel-deploym
 const sessions = new Map();
 const loginAttempts = new Map();
 
-if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '[]\n', 'utf8');
+// Inisialisasi file dipindahkan ke dalam fungsi untuk menghindari error cold start di Vercel
 
 function json(res, status, body) {
   const data = Buffer.from(JSON.stringify(body));
