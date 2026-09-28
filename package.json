@@ -4,9 +4,9 @@
   "private": true,
   "description": "Media pembelajaran sistem peredaran darah untuk jaringan sekolah",
   "scripts": {
-    "start:local": "node server.js",
+    "start:local": "node local-server.js",
     "seed:dummy-teacher": "node scripts/create-dummy-teacher.js",
-    "check": "node --check server.js && node --check js/supabase-client.js && node --check js/auth-dashboard.js && node --check js/app.js && node --check js/audio-manager.js && node --check js/settings.js && node --check js/ui-icons.js"
+    "check": "node --check local-server.js && node --check js/supabase-client.js && node --check js/auth-dashboard.js && node --check js/app.js && node --check js/audio-manager.js && node --check js/settings.js && node --check js/ui-icons.js"
   },
   "engines": {
     "node": ">=20"
